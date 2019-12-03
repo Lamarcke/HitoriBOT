@@ -1,13 +1,12 @@
 import discord
 import os
 import asyncio
-import token
 from itertools import cycle
 from discord.ext import commands
 
 client = commands.Bot(command_prefix='/')
 
-for filename in os.listdir('./cogs'):
+for filename in os.listdir('./cogs/'):
     if filename.endswith('.py'):
         client.load_extension(f'cogs.{filename[:-3]}')
 
@@ -60,5 +59,6 @@ async def ping(ctx):
     await ctx.send(f'Ping: {round(client.latency * 1000)}ms')
 
 
+token = open("token.txt", "r").readline()
 client.loop.create_task(status_change())
-client.run('XXXXXXXXXXXXXXXXXXXXXXXXX')
+client.run(token)
