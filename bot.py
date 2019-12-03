@@ -6,6 +6,8 @@ from discord.ext import commands
 
 client = commands.Bot(command_prefix='/')
 
+# gif = https://media.giphy.com/media/LMcDyquFeVJ8puLY9c/giphy.gif
+
 for filename in os.listdir('./cogs/'):
     if filename.endswith('.py'):
         client.load_extension(f'cogs.{filename[:-3]}')
