@@ -43,7 +43,7 @@ class Search(commands.Cog):
                 url=media_url,
                 colour=discord.Colour.blue()
             )
-            embed.set_author(name='HitoriBOT Search Beam', icon_url='https://i.imgur.com/tBZ9yd3.jpg')
+            embed.set_author(name='Search Beam', icon_url='https://i.imgur.com/tBZ9yd3.jpg')
             embed.set_thumbnail(url='https://media.giphy.com/media/LMcDyquFeVJ8puLY9c/giphy.gif')
             embed.set_image(url=media_image)
             embed.add_field(name='Episódios:', value=media_episodes, inline=True)
