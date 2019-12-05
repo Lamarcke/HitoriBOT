@@ -1,6 +1,7 @@
 import discord
-import datetime as date
+import datetime
 import asyncio
+from icons import *
 from collections import Counter
 from discord.ext import commands
 from jikanpy import AioJikan
@@ -8,27 +9,52 @@ from jikanpy import AioJikan
 
 jikan = AioJikan()
 
+def weekdia(dia):
+    week = {
+        1: 'Segunda-Feira',
+        2: 'Terça-Feira',
+        3: 'Quarta-Feira',
+        4: 'Quinta-Feira',
+        5: 'Sexta-Feira',
+        6: 'Sábado',
+        7: 'Domingo'
+    }
+    return week.get(dia)
+
+def diasemananome(diasemana):
+    dianome = {
+        'segunda': 'monday',
+        'terça': 'tuesday',
+        'terca': 'tuesday',
+        'quarta': 'wednesday',
+        'quinta': 'thursday',
+        'sexta': 'friday',
+        'sabado': 'saturday',
+        'domingo': 'sunday'
+    }
+    return dianome.get(diasemana)
+
 
 class Schedule(commands.Cog):
     def __init__(self, client):
         self.client = client
 
 
-
     @commands.command()
     async def today(self, ctx):
-        gif = 'https://media.giphy.com/media/LMcDyquFeVJ8puLY9c/giphy.gif'
-        todaydate = date.datetime.today()
-        today = todaydate.strftime("%A").lower()
+        todaydate = datetime.datetime.today()
+        date = todaydate.strftime("%A").lower()
+        dia = todaydate.isoweekday()
+        basesearch = await jikan.schedule(day=date)
+
         embed = discord.Embed(
             title=f'**Animes saindo hoje:**',
-            description=f'__**{today.upper()}**__' ,
+            description=f'**Dia: {weekdia(dia)}**',
             url='https://myanimelist.net/anime/season/schedule',
             colour=discord.Colour.blue()
             )
-        embed.set_author(name='Today Schedule Beam', icon_url='https://i.imgur.com/tBZ9yd3.jpg')
-        embed.set_thumbnail(url=gif)
-        basesearch = await jikan.schedule(day=today)
+        embed.set_thumbnail(url=thumb_gif)
+        embed.set_author(name='Schedule Beam', icon_url=icon_image)
 
         '''
         Problema:
@@ -44,28 +70,109 @@ class Schedule(commands.Cog):
 
         A solução empregada, apesar de funcional, pode ser aprimorada. Fique a vontade para fazer um pull request e sugerir uma melhoria
         no algoritmo.
-
-        Aliás, se definir select como 0, o algoritmo vai acusar erro de "IndexError: list index out of range", na variavel search abaixo.
-        Basicamente, quer dizer que a variavel procurou por um valor que não foi recebido, 1 a mais do que a API enviou.
-        A solução, foi definir select como um valor negativo, sendo assim, assim que o loop for começar, ele será incrementado e se
-        tornara 0 (primeiro valor enviado pela API)
-        e assim por diante.
         '''
 
-        max_queries = len(Counter(t['title'] for t in basesearch[f'{today}']))
-        select = -1
+        search = basesearch[date]
+        max_queries = len(Counter(t['title'] for t in search))
         for x in range(0, max_queries):
-            select += 1
-            search = basesearch[f'{today}'][select]
-            media_title = search['title']
-            media_episodes = search['episodes']
-            media_source = search['source']
-            media_score = search['score']
-            embed.add_field(name=f'**{media_title}**', value=f'Fonte: {media_source}, nota: {media_score}', inline=False)
-
+            # Também é possivel usar dict.get() para ACESSAR OS VALORES ao invés de dict['key'] nesses casos.
+            # A vantagem é que a o método .get() retorna um valor padrão caso o valor especificado não seja encontrado.
+            media = search[x]
+            media_title = media['title'] # Ou: media_title = search.get('title')
+            media_episodes = media['episodes'] #Ou: media_episodes = search.get('episodes')
+            media_source = media['source']
+            media_score = media['score']
+            if media_score == None:
+                score = ''
+            else:
+                score = f'| Nota: {media_score}'
+            embed.add_field(name=f'__**{media_title}**__', value=f'Fonte: {media_source} {score}', inline=False)
+            await asyncio.sleep(0.05)
+        
         await ctx.channel.send(embed=embed)
 
 
+    @commands.command()
+    async def tomorrow(self, ctx):
+        '''
+        Dica: impossivel enviar o ctx desse comando para o comando today e re-aproveitar o código do mesmo.
+        Objetos "Command" não podem ser chamados como funções.
+        Resultando no seguinte erro:
+        TypeError: 'Command' object is not callable
+        '''
+        today = datetime.datetime.today()
+        tomorrowdate = today + datetime.timedelta(days=1)
+        date = tomorrowdate.strftime("%A").lower()
+        basesearch = await jikan.schedule(day=date)
+        dia = tomorrowdate.isoweekday()
+
+        embed = discord.Embed(
+            title=f'**Animes saindo amanhã:**',
+            description=f'**Dia: {weekdia(dia)}**',
+            url='https://myanimelist.net/anime/season/schedule',
+            colour=discord.Colour.blue()
+            )
+
+        embed.set_thumbnail(url=thumb_gif)
+        embed.set_author(name='Schedule Beam', icon_url=icon_image)
+
+        search = basesearch[date]
+        max_queries = len(Counter(t['title'] for t in search))
+        for x in range(0, max_queries):
+            media = search[x]
+            media_title = media['title'] 
+            media_episodes = media['episodes']
+            media_source = media['source']
+            media_score = media['score']
+            if media_score == None:
+                score = ''
+            else:
+                score = f'| Nota: {media_score}'
+            embed.add_field(name=f'__**{media_title}**__', value=f'Fonte: {media_source} {score}', inline=False)
+            await asyncio.sleep(0.05)
+        
+        
+        await ctx.send(embed=embed)
+
+    @commands.command()
+    async def schedule(self, ctx, diasemana):
+        if diasemana == 'domingo':
+            titleshow = f'Animes saindo no: {diasemana.capitalize()}'
+        elif diasemana == 'sabado':
+            titleshow = f'Animes saindo no: {diasemana.capitalize()}'
+        elif diasemana == 'sábado':
+            titleshow = f'Animes saindo no: {diasemana.capitalize()}'
+        else:
+            titleshow = f'Animes saindo na {diasemana.capitalize() + "-Feira"}'
+        date = diasemananome(diasemana)
+        basesearch = await jikan.schedule(day=date)
+        search = basesearch[date]
+
+        embed = discord.Embed(
+            title=f'**{titleshow}**',
+            description='',
+            url='https://myanimelist.net/anime/season/schedule',
+            colour=discord.Colour.blue()
+            )
+
+        embed.set_thumbnail(url=thumb_gif)
+        embed.set_author(name='Schedule Beam', icon_url=icon_image)
+
+        search = basesearch[date]
+        max_queries = len(Counter(t['title'] for t in search))
+        for x in range(0, max_queries):
+            media = search[x]
+            media_title = media['title'] 
+            media_episodes = media['episodes']
+            media_source = media['source']
+            media_score = media['score']
+            if media_score == None:
+                score = ''
+            else:
+                score = f'| Nota: {media_score}'
+            embed.add_field(name=f'__**{media_title}**__', value=f'Fonte: {media_source} {score}', inline=False)
+            await asyncio.sleep(0.05)
+        await ctx.channel.send(embed=embed)
 
 def setup(client):
     client.add_cog(Schedule(client))

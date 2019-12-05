@@ -17,7 +17,7 @@ class Recommendation(commands.Cog):
                                    f' Recomendar o quê amigão? especifica ai que eu sou meio burrinho :(\n'
                                    'Eu posso recomendar: Anime, Manga, Movie, Manhwa e Manhua!')
         else:
-            pagenum = random.randint(0, 20)
+            pagenum = random.randint(0, 30)
             hitori = random.randint(0, 20)
             hitori_url = 'https://myanimelist.net/anime/37614/Hitoribocchi_no_Marumaru_Seikatsu'
 

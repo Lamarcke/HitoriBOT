@@ -6,7 +6,8 @@ from discord.ext import commands
 
 client = commands.Bot(command_prefix='/')
 
-# gif = https://media.giphy.com/media/LMcDyquFeVJ8puLY9c/giphy.gif
+# Necessário arquivo icons.py na pasta raiz para importar as variaveis thumb_gif e icon_image,
+# que serão usadas nos embeds do Bot.
 
 for filename in os.listdir('./cogs/'):
     if filename.endswith('.py'):
