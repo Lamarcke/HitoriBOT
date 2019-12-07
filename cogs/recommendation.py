@@ -11,13 +11,13 @@ class Recommendation(commands.Cog):
         self.client = client
 
     @commands.command()
-    async def recommendme(self, ctx, mediatype=''):
+    async def recommend(self, ctx, mediatype=''):
         if mediatype == '':
             await ctx.channel.send(f'{ctx.author.mention}'
                                    f' Recomendar o quê amigão? especifica ai que eu sou meio burrinho :(\n'
                                    'Eu posso recomendar: Anime, Manga, Movie, Manhwa e Manhua!')
         else:
-            pagenum = random.randint(0, 30)
+            pagenum = random.randint(0, 40)
             hitori = random.randint(0, 20)
             hitori_url = 'https://myanimelist.net/anime/37614/Hitoribocchi_no_Marumaru_Seikatsu'
 
@@ -53,7 +53,7 @@ class Recommendation(commands.Cog):
                                     f'\n',
                                     f'Quem liga pra popularidade? esse tal de **{media_name}** ',
                                     f'parece ser bom, apesar de que eu, como um bot, não sei diferenciar isso...\n',
-                                    f'Que tal dar uma chance pra esse tal de **{media_name}**? Parece legalzinho:']
+                                    f'Que tal dar uma chance pra esse tal de **{media_name}**? Parece legalzinho:\n']
             selectfrases_anime_lowtier = random.choice(frases_anime_lowtier)
             frases_manga = [f'Tem uma galera lendo esse tal de **{media_name}**, parece bom em:',
                             f'Da uma olhada nesse tal de **{media_name}**, ta famosinho e pa:\n',
@@ -81,14 +81,14 @@ class Recommendation(commands.Cog):
 
             else:
                 if mediatype == 'anime' or 'movie':
-                    if pagenum > 8:
+                    if pagenum > 10:
                         await ctx.channel.send(f'{selectfrases_anime_lowtier}{media_url}')
 
                     else:
                         await ctx.channel.send(f'{selectfrases_anime}{media_url}')
 
                 elif mediatype == 'manga' or 'manhwa' or 'manhua':
-                    if pagenum > 8:
+                    if pagenum > 10:
                         await ctx.channel.send(f'{selectfrases_manga_lowtier}{media_url}')
 
                     else:

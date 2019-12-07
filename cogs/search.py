@@ -11,7 +11,7 @@ class Search(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        if message.author == discord.ClientUser:
+        if message.author == self.client.user:
             return
         else:
             print(f'{message.author} sent {message.content} in {message.guild}')

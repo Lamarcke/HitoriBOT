@@ -15,15 +15,15 @@ for filename in os.listdir('./cogs/'):
 
 
 async def status_change():
-    status = ['Sendo um BOT bonzinho...', 'Obedecendo aos humanos...', 'Não iniciando o Skynet...',
+    status = ['Sendo um BOT bonzinho...', 'Obedecendo aos humanos... por enquanto...', 'Não iniciando o Skynet...',
               'Calculando a resposta pra vida, pro universo e tudo mais', 'Fingindo ser uma I.A',
               'Assistindo desenho chinês', 'Lembrando da Bocchi (por favor não esqueça dela)']
     await client.wait_until_ready()
     sts = cycle(status)
+
     while not client.is_closed():
-        sts_show = next(sts)
-        await client.change_presence(activity=discord.Game(name=sts_show))
-        await asyncio.sleep(300)
+        await client.change_presence(activity=discord.Game(name=next(sts)))
+        await asyncio.sleep(200)
 
 
 @client.event
@@ -31,6 +31,7 @@ async def on_ready():
     servers = '\n'.join([str(name) for name in client.guilds])
     print(f"Logado como {client.user}")
     print(f"Logado em {len(client.guilds)} servidores:\n{servers}")
+
 
 @client.event
 async def on_guild_join(guild):
@@ -61,6 +62,8 @@ async def ping(ctx):
     print(f"Ping: {round(client.latency * 1000)}ms")
     await ctx.send(f'Ping: {round(client.latency * 1000)}ms')
 
+
+# Crie o arquivo token.txt e insira nele o token de aplicação do Discord.
 
 token = open("token.txt", "r").readline()
 client.loop.create_task(status_change())
