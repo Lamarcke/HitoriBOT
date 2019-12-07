@@ -13,7 +13,7 @@ Basta clicar no link a seguir, e clickar em adicionar: (necessário permissões 
 
 ### O que ele pode fazer:
 
-* Recomendar um anime, manga, filme, manwha, manhua ou doujin ao usuario usando como base a lista de mais populares do MAL, da pagina 1 à 15.
+* Recomendar um anime, manga, filme, manwha, manhua ou doujin ao usuario usando como base a lista de mais populares do MAL, da pagina 1 à 30.
     Sintax: /recommendme anime, < manga, manwha, manhua, doujin >
 
 * Pesquisar qualquer anime ou mangá na database do MAL e retornar ao usuario em forma de embed no chat.
