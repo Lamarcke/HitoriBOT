@@ -17,8 +17,8 @@ class Recommendation(commands.Cog):
                                    f' Recomendar o quê amigão? especifica ai que eu sou meio burrinho :(\n'
                                    'Eu posso recomendar: Anime, Manga, Movie, Manhwa e Manhua!')
         else:
-            pagenum = random.randint(0, 40)
-            hitori = random.randint(0, 20)
+            pagenum = random.randint(0, 50)
+            hitori = random.randint(1, 25)
             hitori_url = 'https://myanimelist.net/anime/37614/Hitoribocchi_no_Marumaru_Seikatsu'
 
             if mediatype == 'movie':
@@ -81,14 +81,14 @@ class Recommendation(commands.Cog):
 
             else:
                 if mediatype == 'anime' or 'movie':
-                    if pagenum > 10:
+                    if pagenum > 15:
                         await ctx.channel.send(f'{selectfrases_anime_lowtier}{media_url}')
 
                     else:
                         await ctx.channel.send(f'{selectfrases_anime}{media_url}')
 
                 elif mediatype == 'manga' or 'manhwa' or 'manhua':
-                    if pagenum > 10:
+                    if pagenum > 15:
                         await ctx.channel.send(f'{selectfrases_manga_lowtier}{media_url}')
 
                     else:

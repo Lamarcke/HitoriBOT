@@ -12,22 +12,45 @@ Basta clicar no link a seguir, e clickar em adicionar: (necessário permissões 
 
 
 ### O que ele pode fazer:
+- **Explicação dos commandos disponiveis e suas respectivas sintaxes ( "/" sem aspas é o prefixo para realizar comandos.)**
+
+(Ex: /today ou /airing)_ 
 
 * Recomendar um anime, manga, filme, manwha, manhua ou doujin ao usuario usando como base a lista de mais populares do MAL, da pagina 1 à 30.
-    Sintax: /recommendme anime, < manga, manwha, manhua, doujin >
+    
+    /recommendme anime, < manga, manwha, manhua, doujin >
 
 * Pesquisar qualquer anime ou mangá na database do MAL e retornar ao usuario em forma de embed no chat.
-    Sintax: /search < anime, manga, character, person > < nome >
+    
+    /search < anime, manga, character, person > < nome >
 
 * Retornar ao usuario os animes que irão sair no dia em questão.
-    Sintax: /schedule < dia-da-semana > (Ex: /schedule terça [não usar feira])
-    Sintax: /schedule < today > ou < tomorrow > # Retorna os lançamentos do dia ou do dia seguinte.
+    
+    /airing < dia-da-semana > (Ex: /airing terça [não usar feira])
+    
+    /airing < today > ou < tomorrow > # Retorna os lançamentos do dia ou do dia seguinte.
+
+* Rádio de anime 100% funcional, permite avançar estaçoes e acompanhar as estaçoes escolhidas pelo BOT.
+    
+    /radio # Entra no canal de voz atual e sintoniza com a estação escolhida pelo Bot.
+    
+    /radio update # Atualiza a estação sendo tocada atualmente e sintoniza com a escolhida pelo BOT atualmente.
+    
+    /radio next # Avança uma estação no servidor atual, utilize "update" para retornar a estação que o BOT está tocando atualmente.
+     
+
 
 #### CHANGELOG
 
+
 * Adicionado opção de schedule, para o dia atual, seguinte e qualquer dia da semana.
 
+* Adicionado radio HitoriBOT, é radio de otaco, mas pode ouvir que é só musga boa (eu epero)
+
+
 ##### TO-DO
+* Aprimorar Pesquisa:
+  Adicionar opção de genero as pesquisas com o bot.
 
 * Função reminder:
   Lembrar o usuario sobre animes que o mesmo está acompanhando no dia em que eles forem lançar.

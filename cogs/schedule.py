@@ -95,18 +95,18 @@ class Airing(commands.Cog):
 
     @commands.command()
     async def tomorrow(self, ctx):
-        """
-        Dica: impossivel enviar o ctx desse comando para o comando today e re-aproveitar o código do mesmo.
-        Objetos "Command" não podem ser chamados como funções.
-        Resultando no seguinte erro:
-        TypeError: 'Command' object is not callable
-        """
+
         today = datetime.datetime.today()
         tomorrowdate = today + datetime.timedelta(days=1)
         date = tomorrowdate.strftime("%A").lower()
         basesearch = await jikan.schedule(day=date)
         dia = tomorrowdate.isoweekday()
-
+        '''
+        Dica: impossivel enviar o ctx desse comando para o comando today e re-aproveitar o código do mesmo.
+        Objetos "Command" não podem ser chamados como funções.
+        Resultando no seguinte erro:
+        TypeError: 'Command' object is not callable
+        '''
         embed = discord.Embed(
             title=f'**Animes saindo amanhã:**',
             description=f'**Dia: {weekdia(dia)}**',
@@ -136,6 +136,8 @@ class Airing(commands.Cog):
 
     @commands.command()
     async def airing(self, ctx, diasemana):
+        # noinspection PyGlobalUndefined
+        global basesearch
         diasemana = diasemana.lower()
         if diasemananome(diasemana) == 'Data invalida':
             return await ctx.channel.send(
