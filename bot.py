@@ -22,7 +22,8 @@ async def status_change():
     status = ['Sendo um BOT bonzinho... (/help)', 'Obedecendo aos humanos... por enquanto... (/help)',
               'Não iniciando o Skynet... (/help)', 'Calculando a resposta pra vida, pro universo e tudo mais (/help)',
               'Fingindo ser uma I.A (/help)', 'Assistindo desenho chinês (/help)',
-              'Lembrando da Bocchi (por favor não esqueça dela) (/help)']
+              'Lembrando da Bocchi (por favor não esqueça dela) (/help)',
+              'Quer saber o que eu posso fazer? Digita /help ai ;)']
 
     await client.wait_until_ready()
     sts = cycle(status)

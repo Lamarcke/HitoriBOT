@@ -131,8 +131,7 @@ class Radio(commands.Cog):
                 await asyncio.sleep(5)
                 try:
                     voiceclient.play(radiolocal)
-                # Não foi possivel especificar o erro de ClientException abaixo, então ficou uma expressão branda.
-                except:
+                except discord.ClientException:
                     pass
                 await message.delete()
                 return await ctx.channel.send(f"```Você agora está ouvindo a estação: {localname}!```")

@@ -11,6 +11,7 @@ class Search(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
+        await self.client.wait_until_ready()
         if message.author == self.client.user:
             return
         else:

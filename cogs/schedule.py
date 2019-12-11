@@ -42,6 +42,7 @@ class Airing(commands.Cog):
 
     @commands.command()
     async def today(self, ctx):
+        global basesearch
         todaydate = datetime.datetime.today()
         date = todaydate.strftime("%A").lower()
         dia = todaydate.isoweekday()
@@ -95,7 +96,7 @@ class Airing(commands.Cog):
 
     @commands.command()
     async def tomorrow(self, ctx):
-
+        global basesearch
         today = datetime.datetime.today()
         tomorrowdate = today + datetime.timedelta(days=1)
         date = tomorrowdate.strftime("%A").lower()
@@ -157,6 +158,7 @@ class Airing(commands.Cog):
         # noinspection PyBroadException
         try:
             basesearch = await jikan.schedule(day=date)
+        # Tratamento de erro necessário
         except:
             ctx.channel.send(
                 "Erro ao receber informações do servidor, por favor, verifique a ortografia e tente novamente.")
