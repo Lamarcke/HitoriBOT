@@ -9,6 +9,13 @@ class Search(commands.Cog):
     def __init__(self, client):
         self.client = client
 
+    @commands.Cog.listener()
+    async def on_message(self, message):
+        if message.author == self.client.user:
+            return
+
+        print(f"{message.author} said {message.content} on {message.guild}")
+
     @commands.command()
     async def search(self, ctx, mediatype, *, name):
         basesearch = await jikan.search(search_type=mediatype, query=name, parameters={'limit': 1})
