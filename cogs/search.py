@@ -12,7 +12,7 @@ class Search(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message):
         if message.author == self.client.user:
-            print(f"Bot sent {message.content} on {message.guild}")
+            print(f"Bot sent a message on {message.guild}")
             
         else:
             return

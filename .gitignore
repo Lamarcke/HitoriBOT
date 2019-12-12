@@ -5,3 +5,6 @@ jikantest.py
 __pycache__
 icons.py
 token.txt
+/cogs/reminder
+/cogs/reminder.py
+datatest.db
