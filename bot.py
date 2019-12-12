@@ -65,7 +65,8 @@ async def ping(ctx):
 async def help(ctx):
     embed = discord.Embed(
         title='**Comandos do HitoriBOT:**',
-        description='*Um bot de anime, brasileiro, open-source, com diversas funções pra agradar os otacos por ai*',
+        description='*Um bot de anime, brasileiro, open-source, com diversas funções pra agradar os otacos por ai*'
+                    '\nDica: não use < > nos comandos!',
         colour=discord.Colour.blue()
     )
     embed.set_author(name='Help Beam', icon_url=icon_image)

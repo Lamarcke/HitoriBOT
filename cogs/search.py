@@ -12,9 +12,12 @@ class Search(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message):
         if message.author == self.client.user:
+            print(f"Bot sent {message.content} on {message.guild}")
+            
+        else:
             return
 
-        print(f"{message.author} said {message.content} on {message.guild}")
+
 
     @commands.command()
     async def search(self, ctx, mediatype, *, name):
