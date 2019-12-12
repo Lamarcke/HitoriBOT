@@ -111,7 +111,7 @@ async def help(ctx):
     embed.add_field(name='**Recomendações:**', value=recommendationfunction, inline=False)
     embed.add_field(name='**Rádio:**', value=radiofunction, inline=False)
     embed.add_field(name='**+18:**', value=r18function, inline=False)
-    ctx.channel.send(embed=embed)
+    await ctx.channel.send(embed=embed)
 
 
 @client.command()
