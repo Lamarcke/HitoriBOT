@@ -43,7 +43,8 @@ async def on_ready():
 @client.event
 async def on_guild_join(guild):
     channel = guild.system_channel
-    print(f'Bot foi adicionado em um novo servidor.\nInformações: {guild.name} com um total de {guild.member_count}')
+    print(f'Bot foi adicionado em um novo servidor.\nInformações: {guild.name} com um total de {guild.member_count} '
+          f'membros')
     await channel.send('Obrigado por me adicionar!\nDigite /help para ver a lista de comandos disponíveis.')
 
 
@@ -83,10 +84,11 @@ async def help(ctx):
                      "Mostra os lançamentos para um dia especifico.\n" \
                      "*dia da semana*: segunda, terça, domingo etc. (não use -feira!)"
 
-    recommendationfunction = "O bot vai recomendar a você algum anime, manga, manwha etc aleatoriamente, " \
-                             "quem sabe você não acha uma gema perdida por ai né?\n" \
-                             "**/recommend** *<tipo>*\n" \
-                             "*tipo*: anime, manga, manwha, manhua, doujin.\n" \
+    recommendationfunction = "O bot vai recomendar a você algum anime, manga, manwha etc aleatoriamente, ou por " \
+                             "genero. quem sabe você não acha uma gema perdida por ai né?\n" \
+                             "**/recommend** *<tipo> <genero>*\n" \
+                             "*tipo*: anime, manga, manwha, manhua.\n" \
+                             "*genero*: **OPCIONAL** qualquer genero de anime/manga" \
                              "**OBS**: Recomendações de Doujin **SEMPRE** retornam conteúdo adulto.\n" \
                              "Use (OU DEIXE DE USAR) por sua conta e risco!"
 
@@ -99,10 +101,16 @@ async def help(ctx):
                     "a estação atual.\n" \
                     "*comando*: update, next"
 
+    r18function = "**SESSÃO +18**\nTODOS OS COMANDOS AQUI USADOS RETORNAM CONTEUDO ADULTO!\nUse, **ou deixe de usar**" \
+                  "por sua conta e risco!\n" \
+                  "**/recommend18** *<tipo>*\n" \
+                  "*tipo*: hentai (anime), doujin/doujinshi (manga)"
+
     embed.add_field(name='**Pesquisa:**', value=searchfunction, inline=False)
     embed.add_field(name='**Busca por lançamentos:**', value=airingfunction, inline=False)
     embed.add_field(name='**Recomendações:**', value=recommendationfunction, inline=False)
     embed.add_field(name='**Rádio:**', value=radiofunction, inline=False)
+    embed.add_field(name='**+18:**', value=r18function, inline=False)
     ctx.channel.send(embed=embed)
 
 

@@ -20,7 +20,11 @@ Digite /help para visualizar os comandos no chat do discord.
 
 * Recomendar um anime, manga, filme, manwha, manhua ou doujin ao usuario usando como base a lista de mais populares do MAL, da pagina 1 à 30.
     
-    /recommendme anime, < manga, manwha, manhua, doujin >
+    /recommend < anime, manga, manwha, manhua >
+    
+    /recommend <anime, manga> <genero>
+    
+    genero: shoujo, seinen, josei etc.
 
 * Pesquisar qualquer anime ou mangá na database do MAL e retornar ao usuario em forma de embed no chat.
     
@@ -40,7 +44,9 @@ Digite /help para visualizar os comandos no chat do discord.
     
     /radio next # Avança uma estação no servidor atual, utilize "update" para retornar a estação que o BOT está tocando atualmente.
      
+* Recomendações +18 (Use por sua conta e risco!)
 
+    /recommend18 <hentai, doujin, doujinshi>
 
 #### CHANGELOG
 
@@ -51,10 +57,11 @@ Digite /help para visualizar os comandos no chat do discord.
 
 * Implementado comando help aprimorado.
 
-##### TO-DO
-* Aprimorar Pesquisa:
-  Adicionar opção de genero as pesquisas com o bot.
+* Implementado recomendação por generos
 
+* Implementado recomendações +18 (Use com cuidado!)
+
+##### TO-DO
 * Função reminder:
   Lembrar o usuario sobre animes que o mesmo está acompanhando no dia em que eles forem lançar.
   Ainda em fase de implementação.

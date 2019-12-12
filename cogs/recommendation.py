@@ -188,7 +188,6 @@ class Recommendation(commands.Cog):
         else:
             oggenre = genre
             genre = genre.lower()
-            print(mediatype)
             if mediatype == 'anime':
                 genre = genrechooser(genre.capitalize())
             if mediatype == 'manga':
