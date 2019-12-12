@@ -18,7 +18,7 @@ Basta clicar no link a seguir, e clickar em adicionar: (necessário permissões 
 
 Digite /help para visualizar os comandos no chat do discord.
 
-* Recomendar um anime, manga, filme, manwha, manhua ou doujin ao usuario usando como base a lista de mais populares do MAL, da pagina 1 à 30.
+* Recomendar um anime, manga, filme, manwha, manhua ou doujin ao usuario usando como base a database do MyAnimeList.
     
     /recommend < anime, manga, manwha, manhua >
     
