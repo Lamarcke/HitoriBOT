@@ -1,8 +1,8 @@
 import discord
 from discord.ext import commands
-from jikanpy import AioJikan
+from jikanpy import Jikan
 
-jikan = AioJikan()
+jikan = Jikan()
 
 
 class Search(commands.Cog):
@@ -13,15 +13,14 @@ class Search(commands.Cog):
     async def on_message(self, message):
         if message.author == self.client.user:
             print(f"Bot sent a message on {message.guild}")
-            
+
         else:
             return
 
-
-
     @commands.command()
     async def search(self, ctx, mediatype, *, name):
-        basesearch = await jikan.search(search_type=mediatype, query=name, parameters={'limit': 1})
+        name = name.lower()
+        basesearch = jikan.search(search_type=mediatype, query=name)
         # retorna sempre o primeiro valor da busca, que fica dentro de 'results'
         search = basesearch['results'][0]
         # Define o tipo de midia pesquisado (TV, Manga, One-shot) /Não confundir com o parametro mediatype.
