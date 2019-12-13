@@ -6,13 +6,13 @@ Bot criado usando a linguagem de programação Python, e a biblioteca Discordpy.
 
 Caso esteja interessado em ajudar no desenvolvimento, basta fazer seu primeiro pull request e começar a desenvolver.
 
-## Adicione o BOT ao seu servidor:
+### Adicione o BOT ao seu servidor:
 
 Basta clicar no link a seguir, e clickar em adicionar: (necessário permissões de moderação para adicionar)
 <https://discordapp.com/oauth2/authorize?client_id=650197869990772736&scope=bot&permissions=228416>
 
 
-### O que ele pode fazer:
+## O que ele pode fazer:
 
 - **Explicação dos commandos disponiveis e suas respectivas sintaxes ( "/" sem aspas é o prefixo para realizar comandos.)**
 
