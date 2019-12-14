@@ -157,6 +157,11 @@ class Radio(commands.Cog):
                                                   "estações!")
             except AttributeError:
                 pass
+        elif command == 'off' and not None:
+            await ctx.voice_client.disconnect()
+            await ctx.channel.send("Desconectado da rádio.\n"
+                                   "Se quiser sintonizar novamente, basta digitar /radio okay ;)")
+
         counter = 1
         try:
             # Executa se o bot estiver conectado a um canal de voz e a uma estação.

@@ -100,10 +100,14 @@ async def help(ctx):
                     "**/radio** *<comando>*\n" \
                     "Realiza divervas funçoes acerca da rádio, como avançar de estação ou sincronizar com " \
                     "a estação atual.\n" \
-                    "*comando*: update, next"
+                    "*comando*: update, next\n" \
+                    "/stop\n" \
+                    "Para a rádio e sai do canal de voz."
 
-    r18function = "**SESSÃO +18**\nTODOS OS COMANDOS AQUI USADOS RETORNAM CONTEUDO ADULTO!\nUse, **ou deixe de usar**" \
-                  "por sua conta e risco!\n" \
+    r18function = "**SESSÃO +18**\n" \
+                  "TODOS OS COMANDOS AQUI USADOS RETORNAM CONTEUDO ADULTO!\n" \
+                  "E só podem ser usados em canais NSFW!\n" \
+                  "Use, **ou deixe de usar** por sua conta e risco!\n" \
                   "**/recommend18** *<tipo>*\n" \
                   "*tipo*: hentai (anime), doujin/doujinshi (manga)"
 

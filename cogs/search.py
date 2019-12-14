@@ -24,8 +24,9 @@ class Search(commands.Cog):
         # retorna sempre o primeiro valor da busca, que fica dentro de 'results'
         search = basesearch['results'][0]
         # Define o tipo de midia pesquisado (TV, Manga, One-shot) /Não confundir com o parametro mediatype.
-        media_type = search['type']
+
         if mediatype == 'anime':
+            media_type = search['type']
             media_status = search['airing']
             if media_status:
                 status = 'Em lançamento'
@@ -54,6 +55,7 @@ class Search(commands.Cog):
             await ctx.channel.send(embed=embed)
 
         if mediatype == 'manga':
+            media_type = search['type']
             manga_status = search['publishing']
             if manga_status:
                 status = 'Em lançamento'

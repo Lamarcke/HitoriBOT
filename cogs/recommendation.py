@@ -233,6 +233,8 @@ class Recommendation(commands.Cog):
     async def recommend18(self, ctx, mediatype=None):
         # noinspection PyGlobalUndefined
         global hfrases, media_url
+        if not ctx.channel.is_nsfw():
+            return await ctx.channel.send("Ei! Isso aqui é só pra canais adultos.")
         if mediatype is None:
             return await ctx.channel.send(f'{ctx.author.mention} O que você quer exatamente amigo?\n'
                                           'Especifica se é doujin ou hentai pra eu ter uma ideia ;)')
