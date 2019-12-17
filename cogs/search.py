@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 from jikanpy import Jikan
+from icons import icon_image, thumb_gif
 
 jikan = Jikan()
 
@@ -12,7 +13,10 @@ class Search(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message):
         if message.author == self.client.user:
-            print(f"Bot sent a message on {message.guild}")
+            if message.guild is None:
+                print('Bot sent a message on some channel/DM')
+            else:
+                print(f"Bot sent a message on {message.guild}")
 
         else:
             return
@@ -46,8 +50,8 @@ class Search(commands.Cog):
                 url=media_url,
                 colour=discord.Colour.blue()
             )
-            embed.set_author(name='Search Beam', icon_url='https://i.imgur.com/ZChDWnL.png')
-            embed.set_thumbnail(url='https://media.giphy.com/media/LMcDyquFeVJ8puLY9c/giphy.gif')
+            embed.set_author(name='HitoriBOT Search', icon_url=icon_image)
+            embed.set_thumbnail(url=thumb_gif)
             embed.set_image(url=media_image)
             embed.add_field(name='Episódios:', value=media_episodes, inline=True)
             embed.add_field(name='Nota:', value=media_score, inline=True)
@@ -76,8 +80,8 @@ class Search(commands.Cog):
                 url=media_url,
                 colour=discord.Colour.blue()
             )
-            embed.set_author(name='HitoriBOT Search Beam', icon_url='https://i.imgur.com/tBZ9yd3.jpg')
-            embed.set_thumbnail(url='https://media.giphy.com/media/LMcDyquFeVJ8puLY9c/giphy.gif')
+            embed.set_author(name='HitoriBOT Search', icon_url=icon_image)
+            embed.set_thumbnail(url=thumb_gif)
             embed.set_image(url=media_image)
             embed.add_field(name='Capítulos:', value=media_chapters, inline=True)
             embed.add_field(name='Volumes:', value=media_volumes, inline=True)
@@ -88,15 +92,11 @@ class Search(commands.Cog):
         if mediatype == 'character':
             name = search['name']
             url = search['url']
-            print(name)
-            print(url)
             await ctx.channel.send(f'{name}\n{url}')
 
         if mediatype == 'person':
             name = search['name']
             url = search['url']
-            print(name)
-            print(url)
             await ctx.channel.send(f'{name}\n{url}')
 
 

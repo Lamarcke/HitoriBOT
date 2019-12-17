@@ -9,6 +9,8 @@ client = commands.Bot(command_prefix='/')
 # Remove o comando help padrão, para implementação do novo.
 client.remove_command('help')
 
+token = open("token.txt", "r").readline()
+
 # Necessário arquivo icons.py na pasta raiz para importar as variaveis thumb_gif e icon_image,
 # que serão usadas nos embeds do Bot.
 
@@ -51,7 +53,7 @@ async def on_guild_join(guild):
 @client.event
 async def on_disconnect():
     print("BOT disconectado.")
-    await client.start()
+    await client.start(token)
 
 
 @client.command()
@@ -69,9 +71,10 @@ async def help(ctx):
                     '\nDica: não use < > nos comandos!',
         colour=discord.Colour.blue()
     )
-    embed.set_author(name='Help Beam', icon_url=icon_image)
+    embed.set_author(name='HitoriBOT Help', icon_url=icon_image)
     embed.set_thumbnail(url=thumb_gif)
-    embed.set_footer(text='**Quer contribuir com o desenvolvimento no GitHub? Digite /contribute no chat.**')
+    embed.set_footer(text='*Para visualizar os comandos +18, digite /help18 no chat.*\n'
+                          'Quer contribuir com o desenvolvimento? Digite /contribute no chat.')
     searchfunction = "O bot vai pesquisar para você algum anime/manga etc e retornar informações do MyAnimeList.\n" \
                      "**/search** *<tipo> <nome>*\n" \
                      "*tipo* = anime, manga, character, person\n*nome* = nome da midia/personagem/pessoa\n"
@@ -89,9 +92,13 @@ async def help(ctx):
                              "genero. quem sabe você não acha uma gema perdida por ai né?\n" \
                              "**/recommend** *<tipo> <genero>*\n" \
                              "*tipo*: anime, manga, manwha, manhua.\n" \
-                             "*genero*: **OPCIONAL** qualquer genero de anime/manga" \
-                             "**OBS**: Recomendações de Doujin **SEMPRE** retornam conteúdo adulto.\n" \
-                             "Use (OU DEIXE DE USAR) por sua conta e risco!"
+                             "*genero*: **OPCIONAL** qualquer genero de anime/manga"
+    remindfunction = "O bot vai te ajudar a acompanhar qualquer anime em lançamento, te avisando quando os episódios" \
+                     "saírem no japão.\n" \
+                     "**/remind** *<nome do anime>*\n" \
+                     "Ex: /remind boku no hero\n" \
+                     "**/forget** *<nome do anime>*\n" \
+                     "Apaga algum anime que você está acompanhando, desativando os lembretes de episódios novos."
 
     radiofunction = "A rádio do HitoriBOT, varias musicas otacas pra você ficar ouvindo enquanto discute sobre anime " \
                     "moe com seus amigos\n**/radio**\n" \
@@ -100,22 +107,32 @@ async def help(ctx):
                     "**/radio** *<comando>*\n" \
                     "Realiza divervas funçoes acerca da rádio, como avançar de estação ou sincronizar com " \
                     "a estação atual.\n" \
-                    "*comando*: update, next\n" \
-                    "/stop\n" \
+                    "*comando*: update, next, stop, off\n" \
+                    "**/radio** *stop*/*off*\n" \
                     "Para a rádio e sai do canal de voz."
-
-    r18function = "**SESSÃO +18**\n" \
-                  "TODOS OS COMANDOS AQUI USADOS RETORNAM CONTEUDO ADULTO!\n" \
-                  "E só podem ser usados em canais NSFW!\n" \
-                  "Use, **ou deixe de usar** por sua conta e risco!\n" \
-                  "**/recommend18** *<tipo>*\n" \
-                  "*tipo*: hentai (anime), doujin/doujinshi (manga)"
 
     embed.add_field(name='**Pesquisa:**', value=searchfunction, inline=False)
     embed.add_field(name='**Busca por lançamentos:**', value=airingfunction, inline=False)
     embed.add_field(name='**Recomendações:**', value=recommendationfunction, inline=False)
+    embed.add_field(name='**Reminder**', value=remindfunction, inline=False)
     embed.add_field(name='**Rádio:**', value=radiofunction, inline=False)
-    embed.add_field(name='**+18:**', value=r18function, inline=False)
+    await ctx.channel.send(embed=embed)
+
+
+@client.command()
+async def help18(ctx):
+    r18function = "TODOS OS COMANDOS AQUI USADOS RETORNAM CONTEUDO ADULTO!\n" \
+                  "E só podem ser usados em canais NSFW!\n" \
+                  "Use, **ou deixe de usar** por sua conta e risco!\n\n" \
+                  "**/recommend18** *<tipo>*\n" \
+                  "*tipo*: hentai (anime), doujin/doujinshi (manga)"
+    embed = discord.Embed(
+        title='Sessão +18',
+        description=r18function,
+        colour=discord.Colour.blue()
+    )
+
+    embed.set_footer(text='Relaxa, não vou contar pra ninguém ;)')
     await ctx.channel.send(embed=embed)
 
 
@@ -131,8 +148,6 @@ async def contribute(ctx):
 
     await ctx.channel.send(message)
 
-# Crie o arquivo token.txt e insira nele o token de aplicação do Discord.
 
-token = open("token.txt", "r").readline()
 client.loop.create_task(status_change())
 client.run(token)

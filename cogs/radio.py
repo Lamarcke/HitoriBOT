@@ -88,10 +88,6 @@ class Radio(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command()
-    async def stop(self, ctx):
-        await ctx.voice_client.disconnect()
-        await ctx.channel.send("Desconectado da rádio.\nSe quiser sintonizar novamente, basta digitar /radio okay ;)")
 
     @commands.command()
     async def radio(self, ctx, command=None):
@@ -157,7 +153,7 @@ class Radio(commands.Cog):
                                                   "estações!")
             except AttributeError:
                 pass
-        elif command == 'off' and not None:
+        elif command == 'stop' and not None:
             await ctx.voice_client.disconnect()
             await ctx.channel.send("Desconectado da rádio.\n"
                                    "Se quiser sintonizar novamente, basta digitar /radio okay ;)")

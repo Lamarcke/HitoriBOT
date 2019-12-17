@@ -55,7 +55,7 @@ class Airing(commands.Cog):
             colour=discord.Colour.blue()
         )
         embed.set_thumbnail(url=thumb_gif)
-        embed.set_author(name='Schedule Beam', icon_url=icon_image)
+        embed.set_author(name='HitoriBOT Schedule', icon_url=icon_image)
 
         """
         Problema:
@@ -90,7 +90,7 @@ class Airing(commands.Cog):
             else:
                 score = f'| Nota: {media_score}'
             embed.add_field(name=f'__**{media_title}**__', value=f'Fonte: {media_source} {score}', inline=False)
-            await asyncio.sleep(0.03)
+
 
         await ctx.channel.send(embed=embed)
 
@@ -116,7 +116,7 @@ class Airing(commands.Cog):
         )
 
         embed.set_thumbnail(url=thumb_gif)
-        embed.set_author(name='Schedule Beam', icon_url=icon_image)
+        embed.set_author(name='HitoriBOT Schedule', icon_url=icon_image)
 
         search = basesearch[date]
         max_queries = len(Counter(t['title'] for t in search))
@@ -131,7 +131,7 @@ class Airing(commands.Cog):
             else:
                 score = f'| Nota: {media_score}'
             embed.add_field(name=f'__**{media_title}**__', value=f'Fonte: {media_source} {score}', inline=False)
-            await asyncio.sleep(0.03)
+
 
         await ctx.send(embed=embed)
 
@@ -171,7 +171,7 @@ class Airing(commands.Cog):
         )
 
         embed.set_thumbnail(url=thumb_gif)
-        embed.set_author(name='Schedule Beam', icon_url=icon_image)
+        embed.set_author(name='HitoriBOT Schedule', icon_url=icon_image)
         search = basesearch[date]
         max_queries = len(Counter(t['title'] for t in search))
         for x in range(0, max_queries):
@@ -185,7 +185,7 @@ class Airing(commands.Cog):
             else:
                 score = f'| Nota: {media_score}'
             embed.add_field(name=f'__**{media_title}**__', value=f'Fonte: {media_source} {score}', inline=False)
-            await asyncio.sleep(0.03)
+
         await ctx.channel.send(embed=embed)
 
 

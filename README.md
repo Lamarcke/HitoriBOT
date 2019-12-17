@@ -1,68 +1,63 @@
 # HitoriBOT
 
-Bot de anime 100% brasileiro e open-source. Sinta-se livre para contribuir como desejar ao projeto.
+Bot de anime 100% brasileiro e open-source.  
+Sinta-se livre para contribuir como desejar ao projeto.
 
-Bot criado usando a linguagem de programação Python, e a biblioteca Discordpy.
+Bot criado usando Python, e a biblioteca Discordpy.
 
-Caso esteja interessado em ajudar no desenvolvimento, basta fazer seu primeiro pull request e começar a desenvolver.
+Qualquer ajuda no desenvolvimento é bem vinda.  
+ No momento, o BOT se encontra em situação estável, e todas as funções
+inicialmente planejadas foram implementadas.
 
-### Adicione o BOT ao seu servidor:
+Estou aberto a sugestões de funções e ajuda na limpeza do código.  
+Agradeço desde já o seu interesse :)
 
-Basta clicar no link a seguir, e clickar em adicionar: (necessário permissões de moderação para adicionar)
+#### Adicione o BOT ao seu servidor:
+
+Basta clicar no link a seguir, e clickar em adicionar: (necessário permissões de moderação para adicionar)  
 <https://discordapp.com/oauth2/authorize?client_id=650197869990772736&scope=bot&permissions=228416>
+*Caso você não seja um membro da moderação do servidor, envie este link a algum moderador e o mesmo poderá adiciona-lo.*
 
 
 ## O que ele pode fazer:
 
-- **Explicação dos commandos disponiveis e suas respectivas sintaxes ( "/" sem aspas é o prefixo para realizar comandos.)**
+> *Digite /help no chat do Discord após adicionar o BOT para visualizar os comandos..*
 
-Digite /help para visualizar os comandos no chat do discord.
 
-* Recomendar um anime, manga, filme, manwha, manhua ou doujin ao usuario usando como base a database do MyAnimeList.
-    
-    /recommend < anime, manga, manwha, manhua >
-    
-    /recommend <anime, manga> <genero>
-    
-    genero: shoujo, seinen, josei etc.
+* Recomendações:  
+Recomendar um anime, manga, filme, manwha, manhua ao usuario, inclusive filtrando por gêneros.
 
-* Pesquisar qualquer anime ou mangá na database do MAL e retornar ao usuario em forma de embed no chat.
-    
-    /search < anime, manga, character, person > < nome >
 
-* Retornar ao usuario os animes que irão sair no dia em questão.
-    
-    /airing < dia-da-semana > (Ex: /airing terça [não usar feira])
-    
-    /airing < today > ou < tomorrow > # Retorna os lançamentos do dia ou do dia seguinte.
+* Reminder:  
+Auxilia o usuario a acompanhar lançamentos de anime, enviando lembretes ao usuario na hora de lançamento de episódios no japão
+de animes que o usuario acompanha.
 
-* Rádio de anime 100% funcional, permite avançar estaçoes e acompanhar as estaçoes escolhidas pelo BOT.
-    
-    /radio # Entra no canal de voz atual e sintoniza com a estação escolhida pelo Bot.
-    
-    /radio update # Atualiza a estação sendo tocada atualmente e sintoniza com a escolhida pelo BOT atualmente.
-    
-    /radio next # Avança uma estação no servidor atual, utilize "update" para retornar a estação que o BOT está tocando atualmente.
-     
-* Recomendações +18 (Use por sua conta e risco!)
 
-    /recommend18 <hentai, doujin, doujinshi>
+* Pesquisa:  
+Pesquisa qualquer anime ou mangá na database do MAL e mostrar as informações relevantes ao usuario.
+
+
+* Lançamentos  
+Mostra de forma organizada lançamentos do dia atual, seguinte ou de qualquer dia da semana.
+
+
+* Rádio  
+Rádio de anime com estações escolhidas a dedo, com diversas funções.
+
+
+* Recomendações +18 (Use por sua conta e risco!)  
+  (Só funcionam em canais adultos. Se seu servidor não possuir, o comando não vai funcionar.)
 
 #### CHANGELOG
 
-
-* Adicionado opção de schedule, para o dia atual, seguinte e qualquer dia da semana.
-
-* Adicionado radio HitoriBOT, é radio de otaco, mas pode ouvir que é só musga boa (eu epero)
-
-* Implementado comando help aprimorado.
-
-* Implementado recomendação por generos
-
-* Implementado recomendações +18 (Use com cuidado!)
-
-##### TO-DO
-* Função reminder:
-  Lembrar o usuario sobre animes que o mesmo está acompanhando no dia em que eles forem lançar.
-  Ainda em fase de implementação.
+* Atualização 1.0.5:  
+  Adicionado função reminder completa.  
+  Bot estavél, com funções relevantes e com o plano inicial de desenvolvimento completo.
   
+  Futuras atualizações incluirão correções de quaisquer bugs e aprimoramento de funções, assim como implementação de novas
+  se forem relevantes.
+  
+  (Estou aberto a sugestões de funções para implementar.)
+
+#### TO-DO
+  No momento, vazio.
