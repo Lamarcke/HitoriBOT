@@ -2,8 +2,13 @@ import discord
 import asyncio
 import youtube_dl
 import random
+import sqlite3
+from itertools import cycle
 from icons import icon_image
 from discord.ext import commands
+
+conn = sqlite3.connect('./data/hitoridata.db')
+c = conn.cursor()
 
 ytdl_options = {
     'format': 'bestaudio/best',
@@ -56,7 +61,7 @@ def radionaming(radionum):
         5: 'Anime FM',
         6: 'Lofi Hip Hop Radio'
     }
-    return nameradios.get(radionum, 'Desconhecido')
+    return nameradios.get(radionum)
 
 
 def radiocountryget(radionum):
@@ -71,28 +76,48 @@ def radiocountryget(radionum):
     return countryradios.get(radionum, 'Desconhecido')
 
 
+def createdata():
+    c.execute("""CREATE TABLE IF NOT EXISTS radio(
+              guildid INTEGER,
+              localradio INTEGER
+              )""")
+    conn.commit()
+
+
 async def radioupdater(client):
     # noinspection PyGlobalUndefined
     global radiourl, radioname, radiocountry, counter
     while not client.is_closed():
         # Loop for para alterar o valor de x do 1 ao 6 (ultimo valor do for não é atribuido):
         for x in range(1, 7):
-            counter = x
+
             radiourl = radiochooser(x)
             radioname = radionaming(x)
             radiocountry = radiocountryget(x)
             await asyncio.sleep(3600)
 
 
+async def verifyinactivity(client):
+    vclist = client.voice_clients
+    for x in range(0, len(vclist)):
+        voiceclient = vclist[x]
+        guildsys = voiceclient.guild.system_channel
+        voicemembers = voiceclient.channel.members
+        if len(voicemembers) == 1:
+            await voiceclient.disconnect()
+            if guildsys is not None:
+                return await guildsys.send("Parece que eu estou sozinho nesse canal de voz... Então vou me "
+                                           "retirar pra não incomodar ninguém :'(")
+    await asyncio.sleep(300)
+
+
 class Radio(commands.Cog):
     def __init__(self, client):
         self.client = client
-
+        createdata()
 
     @commands.command()
     async def radio(self, ctx, command=None):
-        # noinspection PyGlobalUndefined
-        global counter
         if ctx.message.author.voice is None:
             return await ctx.channel.send("Parece que você não está em nenhum canal de voz...\n"
                                           "Por favor entre em algum e tente sintonizar novamente!")
@@ -109,14 +134,26 @@ class Radio(commands.Cog):
         embed.add_field(name=f'**Estação:**', value=f'{radioname}', inline=True)
         embed.add_field(name='**País:**', value=f'{radiocountry}', inline=True)
         radio = discord.FFmpegPCMAudio(source=radiourl, **ffmpeg_options)
+        guildid = ctx.guild.id
+        c.execute("SELECT * FROM radio WHERE guildid = :guildid", {'guildid': guildid})
+        guildradio = c.fetchone()
+        if not guildradio:
+            c.execute("INSERT INTO radio VALUES (?, 1)", (guildid, ))
+            conn.commit()
+
         if command == 'next' and not None:
             if voiceclient.is_connected():
-                if counter >= 6:
-                    counter = 0
-                localcounter = counter+1
-
-                localurl = (radiochooser(localcounter))
-                localname = (radionaming(localcounter))
+                c.execute("SELECT localradio FROM radio WHERE guildid = :guildid", {'guildid': guildid})
+                guildradio = c.fetchone()
+                localradio = guildradio[0]
+                localradio += 1
+                if localradio > 6:
+                    localradio = 1
+                c.execute("UPDATE radio SET localradio = :localradio WHERE guildid = :guildid",
+                          {'localradio': localradio, 'guildid': guildid})
+                conn.commit()
+                localurl = (radiochooser(localradio))
+                localname = (radionaming(localradio))
                 voiceclient.stop()
                 message = await ctx.channel.send(f'Sintonizando com a estação **{localname}**')
 
@@ -136,7 +173,6 @@ class Radio(commands.Cog):
                 await ctx.channel.send('Você precisa estar sintonizado a rádio para poder avançar estações!')
 
         elif command == 'update' and not None:
-            counter = 1
             try:
                 # Executa se o bot estiver conectado a um canal de voz e a uma estação.
                 if voiceclient.is_playing() and voiceclient.is_connected() and command is not None:
@@ -155,10 +191,9 @@ class Radio(commands.Cog):
                 pass
         elif command == 'stop' and not None:
             await ctx.voice_client.disconnect()
-            await ctx.channel.send("Desconectado da rádio.\n"
-                                   "Se quiser sintonizar novamente, basta digitar /radio okay ;)")
+            return await ctx.channel.send("Desconectado da rádio.\n"
+                                          "Se quiser sintonizar novamente, basta digitar /radio okay ;)")
 
-        counter = 1
         try:
             # Executa se o bot estiver conectado a um canal de voz e a uma estação.
             if voiceclient.is_playing() and voiceclient.is_connected():
@@ -184,3 +219,4 @@ class Radio(commands.Cog):
 def setup(client):
     client.add_cog(Radio(client))
     client.loop.create_task(radioupdater(client))
+    client.loop.create_task(verifyinactivity(client))

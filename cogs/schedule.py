@@ -91,7 +91,6 @@ class Airing(commands.Cog):
                 score = f'| Nota: {media_score}'
             embed.add_field(name=f'__**{media_title}**__', value=f'Fonte: {media_source} {score}', inline=False)
 
-
         await ctx.channel.send(embed=embed)
 
     @commands.command()
@@ -131,7 +130,6 @@ class Airing(commands.Cog):
             else:
                 score = f'| Nota: {media_score}'
             embed.add_field(name=f'__**{media_title}**__', value=f'Fonte: {media_source} {score}', inline=False)
-
 
         await ctx.send(embed=embed)
 

@@ -15,7 +15,7 @@ Agradeço desde já o seu interesse :)
 #### Adicione o BOT ao seu servidor:
 
 Basta clicar no link a seguir, e clickar em adicionar: (necessário permissões de moderação para adicionar)  
-<https://discordapp.com/oauth2/authorize?client_id=650197869990772736&scope=bot&permissions=228416>
+<https://discordapp.com/oauth2/authorize?client_id=650197869990772736&scope=bot&permissions=228416>  
 *Caso você não seja um membro da moderação do servidor, envie este link a algum moderador e o mesmo poderá adiciona-lo.*
 
 
@@ -42,16 +42,21 @@ Mostra de forma organizada lançamentos do dia atual, seguinte ou de qualquer di
 
 
 * Rádio  
-Rádio de anime com estações escolhidas a dedo, com diversas funções.
+Rádio de anime com estações escolhidas a dedo, com diversas funções.  
+A troca de estações embutida permite que cada servidor sintonize a sua estação de preferencia facilmente.
 
 
 * Recomendações +18 (Use por sua conta e risco!)  
-  (Só funcionam em canais adultos. Se seu servidor não possuir, o comando não vai funcionar.)
+  (Só funcionam em canais adultos. Se seu servidor não possui um, o comando não vai funcionar.)
 
 #### CHANGELOG
 
-* Atualização 1.0.5:  
+* Atualização 1.1.0:  
   Adicionado função reminder completa.  
+  Adicionado troca de estações independente para cada servidor  
+  Adicionado verificação de inatividade para desconectar o bot automaticamente.  
+  
+  
   Bot estavél, com funções relevantes e com o plano inicial de desenvolvimento completo.
   
   Futuras atualizações incluirão correções de quaisquer bugs e aprimoramento de funções, assim como implementação de novas
