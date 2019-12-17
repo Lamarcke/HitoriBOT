@@ -4,7 +4,6 @@ jikantest.py
 .vscode
 __pycache__
 icons.py
-token.txt
-/cogs/reminder
+/data
 /cogs/reminder.py
 datatest.db
