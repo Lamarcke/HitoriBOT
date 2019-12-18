@@ -95,7 +95,10 @@ async def help(ctx):
                              "*genero*: **OPCIONAL** qualquer genero de anime/manga"
     remindfunction = "O bot vai te ajudar a acompanhar qualquer anime em lançamento, te avisando quando os episódios" \
                      "saírem no japão.\n" \
+                     "**/reminder**\n" \
+                     "O bot vai te mostrar todos os animes que você está acompanhando." \
                      "**/remind** *<nome do anime>*\n" \
+                     "Adiciona um anime a sua lista de acompanhamentos.\n" \
                      "Ex: /remind boku no hero\n" \
                      "**/forget** *<nome do anime>*\n" \
                      "Apaga algum anime que você está acompanhando, desativando os lembretes de episódios novos."

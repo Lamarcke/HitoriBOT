@@ -141,6 +141,7 @@ async def verifycompleted():
 def createdata():
     c.execute("""CREATE TABLE IF NOT EXISTS animedata(
     userid INTEGER,
+    animename TEXT,
     animeid INTEGER,
     launchday TEXT,
     launchhour TEXT,
@@ -241,8 +242,8 @@ class Reminder(commands.Cog):
                 return await ctx.channel.send("Ei! parece que você já adicionou esse anime a sua lista de lembretes!"
                                               "\nNão se preocupa, não vou esquecer ;)")
 
-        c.execute("INSERT INTO animedata VALUES(?, ?, ?, ?, ?)",
-                  (userid, media_id, launchday, launchhour, media_status))
+        c.execute("INSERT INTO animedata VALUES(?, ?, ?, ?, ?, ?)",
+                  (userid, media_name, media_id, launchday, launchhour, media_status))
         conn.commit()
 
         if diasemana(launchday.lower()) == 'domingo' or 'sábado':
@@ -255,8 +256,31 @@ class Reminder(commands.Cog):
             f' saindo.\nHorário: {launchhour} (UTC-3)\n{media_url}')
 
     @commands.command()
-    async def forget(self, ctx, *, medianame):
+    async def reminder(self, ctx):
+        username = ctx.author.name
+        userid = ctx.author.id
+        c.execute("SELECT animename, launchday, launchhour FROM animedata WHERE userid=:userid", {'userid': userid})
+        dataresult = c.fetchall()
+        if not dataresult:
+            return await ctx.channel.send("Parece que você não está acompanhando nenhum anime no momento...\n"
+                                          "*Dica: para adicionar um novo anime, use /remind <nome do anime>*")
+        embed = discord.Embed(title=f'Lista de Animes de {username}',
+                              description='*Eu estou programado para alertá-lo sobre novos episódios nos seguintes '
+                                          'animes:*',
+                              colour=discord.Colour.blue()
+                              )
 
+        max_queries = len(dataresult)
+        for x in range(0, max_queries):
+            results = dataresult[x]
+            animename = results[0]
+            launchday = results[1]
+            launchhour = results[2]
+            embed.add_field(name=f'**{animename}**', value=f"Saindo {diasemana(launchday.lower())}, às {launchhour}.")
+        return await ctx.channel.send(content=ctx.author.mention, embed=embed)
+
+    @commands.command()
+    async def forget(self, ctx, *, medianame):
         try:
             basesearch = await jikan.search(search_type='anime', query=medianame, parameters={'status': 'airing'})
             search = basesearch['results'][0]

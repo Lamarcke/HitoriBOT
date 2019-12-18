@@ -51,7 +51,7 @@ A troca de estações embutida permite que cada servidor sintonize a sua estaç�
 
 #### CHANGELOG
 
-* Atualização 1.1.0:  
+* Atualização 1.2.0:  
   Adicionado função reminder completa.  
   Adicionado troca de estações independente para cada servidor  
   Adicionado verificação de inatividade para desconectar o bot automaticamente.  
