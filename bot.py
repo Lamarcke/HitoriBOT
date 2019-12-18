@@ -96,7 +96,7 @@ async def help(ctx):
     remindfunction = "O bot vai te ajudar a acompanhar qualquer anime em lançamento, te avisando quando os episódios" \
                      "saírem no japão.\n" \
                      "**/reminder**\n" \
-                     "O bot vai te mostrar todos os animes que você está acompanhando." \
+                     "O bot vai te mostrar todos os animes que você está acompanhando.\n" \
                      "**/remind** *<nome do anime>*\n" \
                      "Adiciona um anime a sua lista de acompanhamentos.\n" \
                      "Ex: /remind boku no hero\n" \
@@ -110,8 +110,8 @@ async def help(ctx):
                     "**/radio** *<comando>*\n" \
                     "Realiza divervas funçoes acerca da rádio, como avançar de estação ou sincronizar com " \
                     "a estação atual.\n" \
-                    "*comando*: update, next, stop, off\n" \
-                    "**/radio** *stop*/*off*\n" \
+                    "*comando*: update, next, stop\n" \
+                    "**/radio** *stop*\n" \
                     "Para a rádio e sai do canal de voz."
 
     embed.add_field(name='**Pesquisa:**', value=searchfunction, inline=False)
