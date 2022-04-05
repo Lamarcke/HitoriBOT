@@ -1,7 +1,7 @@
 # HitoriBOT
 
 ## Fora de manutenção
-Eu não sei se esse bot ainda funciona, mas outros projetos tem minha atenção e eu não tenho plano de continuar o desenvolvimento dele
+### Eu não sei se esse bot ainda funciona, mas outros projetos tem minha atenção e eu não tenho plano de continuar o desenvolvimento dele
 
 Bot de anime 100% brasileiro e open-source.  
 Sinta-se livre para contribuir como desejar ao projeto.
